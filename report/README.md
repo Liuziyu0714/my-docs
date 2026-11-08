@@ -52,6 +52,9 @@
 - 对应 Actions 运行链接：https://github.com/Liuziyu0714/my-docs/actions/runs/42473981108
 
 ![第二次自动运行](images/07-second-run.png)
+![两次运行总览](images/07-actions-list.png)
+![第二次 build 步骤](images/07-build-steps.png)
+![第二次 deploy 日志](images/07-deploy-log.png)
 ![网站新增内容](images/07-site-updated.png)
 
 ## 3. 问题与解决
