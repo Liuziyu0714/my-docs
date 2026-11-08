@@ -48,15 +48,21 @@
 
 （说明：修改 docs/index.md 增加"自动部署验证"文字后推送 main，本次 push 自动触发了新的 Actions 运行（未手动重跑），成功后刷新网站即可看到新增内容。）
 
-- 对应提交链接：（填写第二次 commit 的 GitHub 链接）
-- 对应 Actions 运行链接：（填写第二次运行的 Actions 链接）
+- 对应提交链接：https://github.com/Liuziyu0714/my-docs/commit/15dece1d99beda1ca83d410b5d8d7d46fb6a1e20
+- 对应 Actions 运行链接：https://github.com/Liuziyu0714/my-docs/actions/runs/42473981108
 
 ![第二次自动运行](images/07-second-run.png)
 ![网站新增内容](images/07-site-updated.png)
 
 ## 3. 问题与解决
 
-（按实际情况填写：记录遇到的现象、关键日志、原因和解决操作。如没有遇到错误，说明核对过哪些日志和配置，例如：build 步骤中 mkdocs build --strict 无警告、deploy 步骤中 page_url 输出正确、Pages 环境部署记录与提交一一对应。）
+**问题：首次 Actions 运行在 Configure Pages 步骤失败。**
+
+- 现象：首次推送后工作流自动触发，build 任务的 Configure Pages 步骤报错，deploy 被跳过。
+- 关键日志：`Get Pages site failed. Please verify that the repository has Pages enabled and configured to build using GitHub Actions ... HttpError: Not Found`。
+- 原因：推送与工作流触发发生在我到 Settings → Pages 把来源切换为 GitHub Actions 之前，工作流执行时 Pages 尚未启用，configure-pages 拿不到 Pages 站点信息。
+- 解决：确认 Pages 来源已设为 GitHub Actions 后，在该次运行页面点击 Re-run failed jobs，build 和 deploy 均成功（首次运行记录：https://github.com/Liuziyu0714/my-docs/actions/runs/42473511426 ）。
+- 收获：应先开启 Pages（来源为 GitHub Actions）再触发首次部署；顺序颠倒时重跑失败任务即可，无需修改代码。
 
 ## 4. 原理理解
 
